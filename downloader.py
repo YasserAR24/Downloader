@@ -7,29 +7,8 @@ init(autoreset=True)
 #        ██ ▄█▄ ██ ██▄▄   ██     ██     ██  ██ ██ ▀▀ ██ ██▄▄   
 #         ▀██▀██▀  ██▄▄▄▄ ██████ ▀█████ ▀████▀ ██    ██ ██▄▄▄▄ 
 
-def yt_options():
-    options = []
-    for choice in choices:
-        if choice == "mp3":
-            yt_opts= {
-                'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-            'ignoreerrors': True,
-            }
-        else:
-            yt_opts = {
-                'format': f'bestvideo[height<={choice}]+bestaudio/best[height<={choice}]',
-                'merge_output_format': 'mp4',
-                'ignoreerrors': True,
-            }
-            if choice == "height":
-                yt_opts["format"] = 'bestvideo+bestaudio/best'
-        options.append(yt_opts)
-    return options
+
+
 
 print(f"""{Fore.YELLOW}
 ---------------------------------Gide----------------------------{Fore.CYAN}
@@ -42,6 +21,7 @@ print(f"""{Fore.YELLOW}
 
 links = []
 choices = []
+options = []
 
 def_choice = "height"
 while True:
@@ -61,7 +41,30 @@ while True:
         break
 
 
-options = yt_options()
+
+for choice in choices:
+    if choice == "mp3":
+        yt_opts= {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            'ignoreerrors': True,
+            }
+    else:
+        yt_opts = {
+            'format': f'bestvideo[height<={choice}]+bestaudio/best[height<={choice}]',
+            'merge_output_format': 'mp4',
+            'ignoreerrors': True,
+            }
+        if choice == "height":
+            yt_opts["format"] = 'bestvideo+bestaudio/best'
+    options.append(yt_opts)
+
+print(f"{Fore.GREEN}-------------------------STARTING-------------------------")
+
 for url, option in zip(links, options):
     if "youtube.com" in url or "youtu.be" in url:
         downloads_folder = os.path.join(os.path.expanduser("~"), "Videos", "downloads", "youtube")
