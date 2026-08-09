@@ -1,0 +1,4 @@
+For use this python code you need:
+- python: to install it, follow this video: https://youtu.be/e70ykVBazAg?si=XGTd8GK1-RTI_TwV
+- ffmpeg software: to install and configue it, follow this video: https://youtu.be/e70ykVBazAg?si=XGTd8GK1-RTI_TwV
+- colorama & yt-dlp python libraries: after installing python, just run this command in the CMD: pip install colorama yt-dlp
